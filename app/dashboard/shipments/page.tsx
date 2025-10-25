@@ -38,8 +38,8 @@ export default function ShipmentsPage() {
       const query = searchQuery.toLowerCase()
       const filtered = shipments.filter(
         (shipment) =>
-          shipment.id_expedition.toLowerCase().includes(query) ||
-          shipment.ref_conteneur.toLowerCase().includes(query) ||
+          shipment?.id_expedition.toLowerCase().includes(query) ||
+          shipment.reference.toLowerCase().includes(query) ||
           shipment.fournisseur.toLowerCase().includes(query) ||
           shipment.statut.toLowerCase().includes(query),
       )

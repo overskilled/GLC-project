@@ -3,7 +3,7 @@ export interface Shipment {
   reference: string
   date_depart: string
   date_reception?: string
-  id_expedition?: string
+  id_expedition: string
   fournisseur: string
   cout_total: number
   cout_total_douane: number

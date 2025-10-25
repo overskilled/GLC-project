@@ -64,7 +64,7 @@ export function DeleteShipmentDialog({ open, onOpenChange, shipment, onDeleted }
         <div className="py-4">
           <p className="text-sm text-muted-foreground">
             Êtes-vous sûr de vouloir supprimer l'expédition{" "}
-            <span className="font-semibold">{shipment?.id_expedition}</span> ({shipment?.ref_conteneur}) ?
+            <span className="font-semibold">{shipment?.id_expedition}</span> ({shipment?.reference}) ?
           </p>
           <p className="mt-2 text-sm text-muted-foreground">
             Tous les lots associés à cette expédition seront également affectés.

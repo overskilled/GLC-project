@@ -31,7 +31,7 @@ export function DeleteLotDialog({ open, onOpenChange, lot, onDeleted }: DeleteLo
 
     setIsDeleting(true)
     try {
-      const { error } = await supabase.from("physical_lots").delete().eq("id_lot", lot.id_lot)
+      const { error } = await supabase.from("physical_lots").delete().eq("id_lot", lot.id)
 
       if (error) throw error
 
@@ -63,7 +63,7 @@ export function DeleteLotDialog({ open, onOpenChange, lot, onDeleted }: DeleteLo
 
         <div className="py-4">
           <p className="text-sm text-muted-foreground">
-            Êtes-vous sûr de vouloir supprimer le lot <span className="font-semibold">{lot?.id_lot}</span> (
+            Êtes-vous sûr de vouloir supprimer le lot <span className="font-semibold">{lot?.id}</span> (
             {lot?.sku_physique}) ?
           </p>
           <p className="mt-2 text-sm text-muted-foreground">

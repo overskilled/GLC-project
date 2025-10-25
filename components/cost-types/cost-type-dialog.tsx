@@ -20,6 +20,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import type { CostType } from "@/lib/types/cost-type"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "sonner"
 
 const costTypeSchema = z.object({
   nom: z.string().min(1, "Nom requis"),
@@ -54,7 +55,7 @@ export function CostTypeDialog({ open, onOpenChange, costType, onSaved }: CostTy
     watch,
     formState: { errors, isSubmitting },
   } = useForm<CostTypeFormValues>({
-    resolver: zodResolver(costTypeSchema),
+    resolver: zodResolver(costTypeSchema as any),
     defaultValues: {
       nom: "",
       code: "",
@@ -107,29 +108,19 @@ export function CostTypeDialog({ open, onOpenChange, costType, onSaved }: CostTy
 
         if (error) throw error
 
-        toast({
-          title: "Type de coût modifié",
-          description: "Le type de coût a été modifié avec succès",
-        })
+        toast.success( "Le type de coût a été modifié avec succès")
       } else {
         const { error } = await supabase.from("cost_types").insert(costTypeData)
 
         if (error) throw error
 
-        toast({
-          title: "Type de coût ajouté",
-          description: "Le type de coût a été ajouté avec succès",
-        })
+        toast.success("Le type de coût a été ajouté avec succès")
       }
 
       onSaved()
     } catch (error) {
       console.error("[v0] Error saving cost type:", error)
-      toast({
-        title: "Erreur",
-        description: "Impossible de sauvegarder le type de coût",
-        variant: "destructive",
-      })
+      toast.error("Impossible de sauvegarder le type de coût")
     }
   }
 
@@ -145,7 +136,7 @@ export function CostTypeDialog({ open, onOpenChange, costType, onSaved }: CostTy
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={() => onSubmit()} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="code">Code *</Label>

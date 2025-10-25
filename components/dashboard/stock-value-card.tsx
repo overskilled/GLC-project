@@ -24,7 +24,7 @@ export function StockValueCard() {
       if (error) throw error
 
       const lots: Lot[] = data || []
-      const totalValue = lots.reduce((sum, lot) => sum + lot.cout_achat_unitaire * lot.quantite_totale, 0)
+      const totalValue = lots.reduce((sum, lot) => sum + lot.prix_achat_unitaire * lot.quantite, 0)
 
       setStockValue(totalValue)
     } catch (error) {
